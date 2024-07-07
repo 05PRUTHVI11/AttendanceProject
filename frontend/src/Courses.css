@@ -1,0 +1,156 @@
+/* Courses.css */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.containerCourse {
+  padding: 10px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+}
+
+h2,
+h3 {
+  text-align: center;
+  color: #333;
+  margin: 20px 0 5px 0; /* Reduce the space above and below */
+}
+
+table {
+  width: 100%;
+  max-width: 1000px;
+  border-collapse: collapse;
+  margin-bottom: 2px;
+}
+
+/* th,
+td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #333;
+  color: white;
+} */
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* tr:hover {
+  background-color: #f1f1f1;
+} */
+
+tr.editing {
+  background-color: #e0f7fa;
+}
+
+input[type='text'] {
+  /* width: calc(100% - 24px); */
+  padding: 10px;
+  margin: 2px 0;
+  box-sizing: border-box;
+}
+
+.new-course-inputs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.addbutton {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+button {
+  margin: 5px;
+}
+
+.custom-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  margin: 5px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: auto;
+  transition: background-color 0.3s;
+}
+
+.custom-button:hover {
+  background-color: #45a049;
+}
+
+.custom-button:focus {
+  outline: none;
+}
+
+.save-button {
+  background-color: #4caf50;
+}
+
+.save-button:hover {
+  background-color: #45a049;
+}
+
+.cancel-button {
+  background-color: #f44336;
+}
+
+.cancel-button:hover {
+  background-color: #e53935;
+}
+
+.edit-button {
+  background-color: orange;
+}
+
+.edit-button:hover {
+  background-color: rgb(199, 132, 6);
+}
+
+.delete-button {
+  background-color: #f44336;
+}
+
+.delete-button:hover {
+  background-color: #e53935;
+}
+
+.add-row-button {
+  background-color: #008cba;
+}
+
+.add-row-button:hover {
+  background-color: #007bb5;
+}
+
+.submit-button {
+  background-color: #4caf50;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+.iconPadding {
+  padding-right: 10px;
+}

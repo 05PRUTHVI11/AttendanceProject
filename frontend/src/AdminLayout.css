@@ -1,0 +1,5 @@
+/* src/AdminLayout.css */
+.content-with-sidebar {
+  margin-left: 200px;
+  padding-top: 200px; /* Offset for top navbar */
+}
