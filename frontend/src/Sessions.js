@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrash, faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
 
+//test
 const Sessions = ({ authToken }) => {
   const [sessions, setSessions] = useState([]);
   const [newSessions, setNewSessions] = useState([{ year: '', sem: '' }]);
