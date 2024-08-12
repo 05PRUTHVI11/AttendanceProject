@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from './axios';
 import './Courses.css';
 
 const CourseAllotment = ({ authToken }) => {
@@ -20,7 +20,7 @@ const CourseAllotment = ({ authToken }) => {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/courses', {
+      const response = await axios.get('/courses', {
         headers: { Authorization: `Bearer ${authToken}` },
       });
       setCourses(response.data);
@@ -36,7 +36,7 @@ const CourseAllotment = ({ authToken }) => {
         credit: parseInt(course.credit, 10),
       }));
 
-      await axios.post('http://localhost:8080/courses', parsedCoursesData, {
+      await axios.post('/courses', parsedCoursesData, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
 
@@ -49,7 +49,7 @@ const CourseAllotment = ({ authToken }) => {
 
   const handleDeleteCourse = async (code) => {
     try {
-      await axios.delete(`http://localhost:8080/courses/${code}`, {
+      await axios.delete(`/courses/${code}`, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
       fetchCourses();
@@ -76,13 +76,9 @@ const CourseAllotment = ({ authToken }) => {
         ...editCourseData,
         credit: parseInt(editCourseData.credit, 10),
       };
-      await axios.put(
-        `http://localhost:8080/courses/${code}`,
-        parsedCourseData,
-        {
-          headers: { Authorization: `Bearer ${authToken}` },
-        }
-      );
+      await axios.put(`/courses/${code}`, parsedCourseData, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
       setEditCourse(null);
       setEditCourseData({ code: '', title: '', credit: '' });
       fetchCourses();

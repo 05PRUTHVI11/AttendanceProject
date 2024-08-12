@@ -1,6 +1,6 @@
 // src/Courses.js
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from './axios';
 import './Courses.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
@@ -21,7 +21,7 @@ const Courses = ({ authToken }) => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/courses', {
+        const response = await axios.get('/courses', {
           headers: { Authorization: `Bearer ${authToken}` },
         });
         setCourses(response.data);
@@ -37,7 +37,7 @@ const Courses = ({ authToken }) => {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/courses', {
+      const response = await axios.get('/courses', {
         headers: { Authorization: `Bearer ${authToken}` },
       });
       setCourses(response.data);
@@ -53,7 +53,7 @@ const Courses = ({ authToken }) => {
         credit: parseInt(course.credit, 10),
       }));
 
-      await axios.post('http://localhost:8080/courses', parsedCoursesData, {
+      await axios.post('/courses', parsedCoursesData, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
 
@@ -66,7 +66,7 @@ const Courses = ({ authToken }) => {
 
   const handleDeleteCourse = async (code) => {
     try {
-      await axios.delete(`http://localhost:8080/courses/${code}`, {
+      await axios.delete(`/courses/${code}`, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
       fetchCourses();
@@ -81,13 +81,9 @@ const Courses = ({ authToken }) => {
         ...editCourseData,
         credit: parseInt(editCourseData.credit, 10),
       };
-      await axios.put(
-        `http://localhost:8080/courses/${code}`,
-        parsedCourseData,
-        {
-          headers: { Authorization: `Bearer ${authToken}` },
-        }
-      );
+      await axios.put(`/courses/${code}`, parsedCourseData, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
       setEditCourse(null);
       setEditCourseData({ code: '', title: '', credit: '' });
       fetchCourses();

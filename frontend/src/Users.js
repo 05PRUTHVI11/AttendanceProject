@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from './axios';
+
 import './Courses.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
@@ -20,7 +21,7 @@ const Users = ({ authToken }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/users', {
+        const response = await axios.get('/users', {
           headers: { Authorization: `Bearer ${authToken}` },
         });
         setUsers(response.data);
@@ -33,7 +34,7 @@ const Users = ({ authToken }) => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/users', {
+      const response = await axios.get('/users', {
         headers: { Authorization: `Bearer ${authToken}` },
       });
       setUsers(response.data);
@@ -44,7 +45,7 @@ const Users = ({ authToken }) => {
 
   const handleAddUser = async () => {
     try {
-      await axios.post('http://localhost:8080/register', newUsers, {
+      await axios.post('/register', newUsers, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
 
@@ -57,7 +58,7 @@ const Users = ({ authToken }) => {
 
   const handleDeleteUser = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/user`, {
+      await axios.delete(`/user`, {
         headers: { Authorization: `Bearer ${authToken}` },
         params: { id },
       });
@@ -79,7 +80,7 @@ const Users = ({ authToken }) => {
         parsedUserData.password = editUserData.password;
       }
 
-      await axios.put('http://localhost:8080/user', parsedUserData, {
+      await axios.put('/user', parsedUserData, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
 

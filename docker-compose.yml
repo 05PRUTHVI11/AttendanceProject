@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - '3000:80'
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=host.docker.internal
+      - DB_PORT=3306
+      - DB_DATABASE=student_attendance_system
+      - DB_USERNAME=root
+      - DB_PASSWORD=2C@A5F9b
+    ports:
+      - '9090:9090'
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 2C@A5F9b
+      MYSQL_DATABASE: student_attendance_system
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./dumps:/docker-entrypoint-initdb.d
+    ports:
+      - '3306:3306'
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:

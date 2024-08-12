@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import axios from './axios';
 import './viewAllotment.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
@@ -20,12 +20,9 @@ const ViewAllotments = ({ authToken }) => {
 
   const fetchAllotments = useCallback(async () => {
     try {
-      const response = await axios.get(
-        'http://localhost:8080/courseAllotment',
-        {
-          headers: { Authorization: `Bearer ${authToken}` },
-        }
-      );
+      const response = await axios.get('/courseAllotment', {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
       const data = response.data || [];
       setAllotments(data);
     } catch (error) {
@@ -38,31 +35,25 @@ const ViewAllotments = ({ authToken }) => {
       await fetchAllotments();
 
       try {
-        const sessionsResponse = await axios.get(
-          'http://localhost:8080/sessions',
-          {
-            headers: { Authorization: `Bearer ${authToken}` },
-          }
-        );
+        const sessionsResponse = await axios.get('/sessions', {
+          headers: { Authorization: `Bearer ${authToken}` },
+        });
         setSessions(sessionsResponse.data || []);
       } catch (err) {
         console.error('Failed to fetch sessions', err);
       }
 
       try {
-        const coursesResponse = await axios.get(
-          'http://localhost:8080/courses',
-          {
-            headers: { Authorization: `Bearer ${authToken}` },
-          }
-        );
+        const coursesResponse = await axios.get('/courses', {
+          headers: { Authorization: `Bearer ${authToken}` },
+        });
         setCourses(coursesResponse.data || []);
       } catch (err) {
         console.error('Failed to fetch courses', err);
       }
 
       try {
-        const usersResponse = await axios.get('http://localhost:8080/users', {
+        const usersResponse = await axios.get('/users', {
           headers: { Authorization: `Bearer ${authToken}` },
         });
         setUsers(usersResponse.data || []);
@@ -76,7 +67,7 @@ const ViewAllotments = ({ authToken }) => {
 
   const handleDeleteAllotment = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/courseAllotment/${id}`, {
+      await axios.delete(`/courseAllotment/${id}`, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
       await fetchAllotments(); // Ensure fetchAllotments is awaited after delete
@@ -100,13 +91,9 @@ const ViewAllotments = ({ authToken }) => {
           courses.find((course) => course.title === allotment.title)?.id,
       };
 
-      await axios.put(
-        `http://localhost:8080/courseAllotment/${allotment.id}`,
-        allotmentData,
-        {
-          headers: { Authorization: `Bearer ${authToken}` },
-        }
-      );
+      await axios.put(`/courseAllotment/${allotment.id}`, allotmentData, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
 
       setEditAllotment(null);
       await fetchAllotments(); // Ensure fetchAllotments is awaited after edit
@@ -151,13 +138,9 @@ const ViewAllotments = ({ authToken }) => {
         course_id: parseInt(course.course_id, 10),
       }));
 
-      await axios.post(
-        'http://localhost:8080/courseAllotment',
-        parsedCoursesData,
-        {
-          headers: { Authorization: `Bearer ${authToken}` },
-        }
-      );
+      await axios.post('/courseAllotment', parsedCoursesData, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
 
       setNewCourses([{ user_id: '', course_id: '', session_id: '' }]);
       await fetchAllotments(); // Ensure fetchAllotments is awaited after adding new courses

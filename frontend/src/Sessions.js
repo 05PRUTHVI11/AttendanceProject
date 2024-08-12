@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from './axios';
 import './Courses.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
@@ -17,7 +17,7 @@ const Sessions = ({ authToken }) => {
   useEffect(() => {
     const fetchSessions = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/sessions', {
+        const response = await axios.get('/sessions', {
           headers: { Authorization: `Bearer ${authToken}` },
         });
         setSessions(response.data);
@@ -30,7 +30,7 @@ const Sessions = ({ authToken }) => {
 
   const fetchSessions = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/sessions', {
+      const response = await axios.get('/sessions', {
         headers: { Authorization: `Bearer ${authToken}` },
       });
       setSessions(response.data);
@@ -41,7 +41,7 @@ const Sessions = ({ authToken }) => {
 
   const handleAddSession = async () => {
     try {
-      await axios.post('http://localhost:8080/sessions', newSessions, {
+      await axios.post('/sessions', newSessions, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
 
@@ -54,7 +54,7 @@ const Sessions = ({ authToken }) => {
 
   const handleDeleteSession = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/sessions/${id}`, {
+      await axios.delete(`/sessions/${id}`, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
       fetchSessions();
@@ -65,7 +65,7 @@ const Sessions = ({ authToken }) => {
 
   const handleEditSession = async (id) => {
     try {
-      await axios.put(`http://localhost:8080/sessions/${id}`, editSessionData, {
+      await axios.put(`/sessions/${id}`, editSessionData, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
       setEditSession(null);

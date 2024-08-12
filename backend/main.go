@@ -89,5 +89,5 @@ func main() {
     auth.GET("/viewStudentAttendanceList/", middlewares.Authorize("admin"), handlers.ViewStudentAttendanceList(db))
     auth.DELETE("/deleteStudentAttendanceList", middlewares.Authorize("admin"), handlers.DeleteAttendance(db))
     
-    r.Run(":8080")
+    r.Run(":9090")
 }
